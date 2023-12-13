@@ -1,0 +1,78 @@
+
+//+------------------------------------------------------------------+
+//|                                                     Multiversal |
+//|                              Developed by Forex Robot Easy Team |
+//|                                             forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+// Define input parameters
+input int MagicNumber = 12345; // Unique identifier for the trades
+input double LotSize = 0.01; // Trading lot size
+input int MaxSpread = 5; // Maximum allowed spread for trading
+input int MaxAttempts = 5; // Maximum number of attempts for order execution
+input int Slippage = 3; // Maximum allowed slippage
+
+// Define an array of currency pairs
+string[] CurrencyPairs = {'EURUSD', 'GBPUSD', 'USDJPY', 'AUDUSD', 'NZDUSD',
+                          'USDCAD', 'USDCHF', 'EURGBP', 'EURJPY', 'GBPJPY',
+                          'AUDJPY', 'CADJPY', 'CHFJPY', 'EURAUD', 'EURAUD',
+                          'GBPAUD', 'AUDNZD', 'AUDCAD', 'EURCAD', 'GBPCAD'};
+
+// Define the OnTick function to handle trade execution
+void OnTick()
+{
+    // Loop through each currency pair
+    for(int i = 0; i < ArraySize(CurrencyPairs); i++)
+    {
+        // Set the currency pair
+        string symbol = CurrencyPairs[i];
+        
+        // Set the optimal settings for the currency pair
+        SetOptimalSettings(symbol);
+        
+        // Check if the spread is within the allowed range
+        if(SymbolInfoDouble(symbol, SYMBOL_SPREAD) <= MaxSpread)
+        {
+            // Execute the scalping strategy
+            ExecuteScalpingStrategy(symbol);
+        }
+    }
+}
+
+// Define the SetOptimalSettings function to set the optimal settings for each currency pair
+void SetOptimalSettings(string symbol)
+{
+    // Implement the logic to set the optimal settings for the currency pair
+    // ...
+    // ...
+}
+
+// Define the ExecuteScalpingStrategy function to execute the scalping strategy for a given currency pair
+void ExecuteScalpingStrategy(string symbol)
+{
+    // Implement the logic to execute the scalping strategy for the currency pair
+    // ...
+    // ...
+}
+
+// Define the OnInit function to initialize the trading robot
+void OnInit()
+{
+    // Set the necessary parameters for the trading robot
+    SymbolSelectAll(true);
+    SymbolSetInteger(0, SYMBOL_TRADE_ALLOWED, true);
+    SymbolSetInteger(0, SYMBOL_TRADE_MODE, SYMBOL_TRADE_MODE_FULL);
+}
+
+// Define the main program entry point
+int start()
+{
+    // Initialize the trading robot
+    OnInit();
+    
+    // Start trading
+    OnTick();
+    
+    // Return a successful result
+    return(0);
+}
